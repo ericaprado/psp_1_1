@@ -8,13 +8,11 @@ package edu.uniandes.ecos.controller;
 import edu.uniandes.ecos.RelativeSize;
 import edu.uniandes.ecos.printer.ResultsPrinter;
 import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.servlet.*;
 
 /**
  *
@@ -43,17 +41,13 @@ public class WebController extends HttpServlet {
         String list1 = "6,6,8.3333,10.3333,12.3333,16.4,20.5,21.75,22.25,23,28.3333,29,55.8";
         String list2 = "7,12,10,12,10,12,12,12,12,8,8,8,20,14,18,12";
         String list3 = "14,8,12.5,2.8333,12.75,26,14.5,6.3333,10.3333,2.7142,5.6,13.5,12.25";
-        
-        ResultsPrinter.printConsoleResults("Pages/Chapter", relativeSize.getRanges(list2));
-        ResultsPrinter.printConsoleResults("Classes PSP", relativeSize.getRanges(list3));
-        
+                
         String result = "<HTML>";
                
         result += ResultsPrinter.printWebResults("LOC/Method", relativeSize.getRanges(list1));
-        result += printer.printWebResults(2, setValues(list1, list4));
-        result += printer.printWebResults(3, setValues(list2, list3));
-        result += printer.printWebResults(4, setValues(list2, list4));
-        
+        result += ResultsPrinter.printWebResults("Pages/Chapter", relativeSize.getRanges(list2));
+        result += ResultsPrinter.printWebResults("Classes PSP", relativeSize.getRanges(list3));
+                
         result += "</HTML>";
         
         resp.getWriter().write(result);          
